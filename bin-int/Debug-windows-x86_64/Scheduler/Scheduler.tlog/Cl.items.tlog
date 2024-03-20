@@ -1,0 +1,9 @@
+C:\KPI\6semester\OS\Labs\lab1\Scheduler\src\CPU.cpp;C:\KPI\6semester\OS\Labs\lab1\bin-int\Debug-windows-x86_64\Scheduler\CPU.obj
+C:\KPI\6semester\OS\Labs\lab1\Scheduler\src\Process.cpp;C:\KPI\6semester\OS\Labs\lab1\bin-int\Debug-windows-x86_64\Scheduler\Process.obj
+C:\KPI\6semester\OS\Labs\lab1\Scheduler\src\ProcessProducer.cpp;C:\KPI\6semester\OS\Labs\lab1\bin-int\Debug-windows-x86_64\Scheduler\ProcessProducer.obj
+C:\KPI\6semester\OS\Labs\lab1\Scheduler\src\Queue.cpp;C:\KPI\6semester\OS\Labs\lab1\bin-int\Debug-windows-x86_64\Scheduler\Queue.obj
+C:\KPI\6semester\OS\Labs\lab1\Scheduler\src\Schedulers\FCFSScheduler.cpp;C:\KPI\6semester\OS\Labs\lab1\bin-int\Debug-windows-x86_64\Scheduler\FCFSScheduler.obj
+C:\KPI\6semester\OS\Labs\lab1\Scheduler\src\Schedulers\RRScheduler.cpp;C:\KPI\6semester\OS\Labs\lab1\bin-int\Debug-windows-x86_64\Scheduler\RRScheduler.obj
+C:\KPI\6semester\OS\Labs\lab1\Scheduler\src\Schedulers\Scheduler.cpp;C:\KPI\6semester\OS\Labs\lab1\bin-int\Debug-windows-x86_64\Scheduler\Scheduler.obj
+C:\KPI\6semester\OS\Labs\lab1\Scheduler\src\main.cpp;C:\KPI\6semester\OS\Labs\lab1\bin-int\Debug-windows-x86_64\Scheduler\main.obj
+C:\KPI\6semester\OS\Labs\lab1\Scheduler\src\SystemController.cpp;C:\KPI\6semester\OS\Labs\lab1\bin-int\Debug-windows-x86_64\Scheduler\SystemController.obj
