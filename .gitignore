@@ -50,6 +50,7 @@
 # Custom
 *bin/
 *bit-int/
+*.sln
 
 
 
