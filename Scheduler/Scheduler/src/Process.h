@@ -9,6 +9,7 @@ class Process
 {
 public:
 	Process(size_t id, float burstTime, float creationTime);
+	bool operator<(Process const& other) { return ID < other.ID; }
 	void Execute();
 
 	size_t ID;

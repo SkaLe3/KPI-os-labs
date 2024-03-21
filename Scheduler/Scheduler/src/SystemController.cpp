@@ -1,8 +1,13 @@
 #include "SystemController.h"
-#include <iostream>
-
-// temp
+#include "Schedulers/RRScheduler.h"
+#include "Schedulers/FCFSScheduler.h"
+#include "CPU.h"
 #include "Process.h"
+#include "Log/Logger.h"
+
+#include <vector>
+#include <algorithm>
+#include <deque>
 
 SystemController::SystemController(Options& options)
 {
@@ -16,12 +21,10 @@ SystemController::SystemController(Options& options)
 		m_Scheduler = std::make_unique<FCFSScheduler>(m_CPU);
 		break;
 	default:
-		std::cout << "ERROR: Provided invalid scheduler algorithm" << std::endl;
-		// @TODO: Make error logging
-		break;
+		LOG_ASSERT(false, "Provided invalid scheduler algorithm");
 	}
 	
-	ProducerProperties props = {options.Quantity, options.InitialQuantity, options.MinExpectedTime, options.MaxExpectedTime };
+	ProducerProperties props = {options.Quantity, options.InitialQuantity, options.MinExpectedTime, options.MaxExpectedTime, options.SpawnChance, options.Seed };
 
 
 	m_Producer = std::make_unique<ProcessProducer>(props, m_CPU);
@@ -29,6 +32,10 @@ SystemController::SystemController(Options& options)
 	std::shared_ptr<Queue> queue = std::make_shared<Queue>();
 	m_Producer->SetQueue(queue);
 	m_Scheduler->SetQueue(queue);
+
+	std::vector<std::string> headers = {"Created", "Started", "Finished","Elapsed", "Burst", "Work", "Wait"};
+	m_Printer = std::make_unique<Printer>(headers, 8);
+	m_Printer->PrintAlgorithm(options.Algorithm);
 }
 
 void SystemController::Run()
@@ -49,13 +56,10 @@ void SystemController::Run()
 
 	}
 	std::unique_ptr<Queue> log = m_Scheduler->GetFinishedProcessesLog();
-	// @TODO: steal implementations of iterators from Game Engine Layer class
-	for (int i = 0; i < 30; i++)
-	{
-		std::unique_ptr<Process> process = log->PopProcess();
-		std::cout << "ID " << process->ID << "\tBurst " << process->BurstTime
-			<< "\tWait " << process->WaitTime << "\tWork " << process->WorkTime
-			<< "\tStart " << process->StartTime << "\tFinish " << process->FinishTime
-			<< "\tCreation " << process->CreationTime << std::endl;
-	}
+
+	std::sort(log->begin(), log->end(), [](const std::unique_ptr<Process>& ptr1, const std::unique_ptr<Process>& ptr2) {
+		return ptr1->ID < ptr2->ID;
+		}
+	);
+	m_Printer->PrintProcessLog(std::move(log));
 }

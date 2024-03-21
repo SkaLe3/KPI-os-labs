@@ -1,11 +1,9 @@
 #pragma once
-#include "Schedulers/RRScheduler.h"
-#include "Schedulers/FCFSScheduler.h"
 #include "ProcessProducer.h"
-#include "CPU.h"
+#include "Schedulers/Scheduler.h"
+#include "Log/Printer.h"
 
 #include <memory>
-
 
 struct Options
 {
@@ -16,10 +14,14 @@ struct Options
 	float MinExpectedTime;
 	float MaxExpectedTime;
 
-	float QuantumTime = 3.0f;
+	float QuantumTime;
+
+	float SpawnChance;
+	int32_t Seed;
+	bool RandomSeed;
 };
 
-
+class CPU;
 
 class SystemController
 {
@@ -31,6 +33,7 @@ private:
 	std::shared_ptr<CPU> m_CPU;
 	std::unique_ptr<Scheduler> m_Scheduler;
 	std::unique_ptr<ProcessProducer> m_Producer;
+	std::unique_ptr<Printer> m_Printer;
 
 	bool bNoMoreProcesses = false;
 	bool bActive = true;

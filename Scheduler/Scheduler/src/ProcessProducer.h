@@ -2,6 +2,7 @@
 #include "Queue.h"
 
 #include <memory>
+#include <random>
 
 class CPU;
 
@@ -9,8 +10,11 @@ struct ProducerProperties
 {
 	size_t ProcessesQuantity;
 	size_t InitialProcessesQuantity;
-	size_t MinExpectedTime;
-	size_t MaxExpectedTime;
+	float MinExpectedTime;
+	float MaxExpectedTime;
+
+	float SpawnChance;
+	int32_t Seed;
 };
 
 
@@ -32,6 +36,9 @@ private:
 
 	ProducerProperties m_Properties;
 	size_t m_NextID;
+
+	std::mt19937 m_RandomProcessSpawn;
+	std::mt19937 m_RandomBurstTime;
 
 
 };

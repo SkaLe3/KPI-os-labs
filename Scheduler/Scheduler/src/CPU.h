@@ -1,22 +1,33 @@
 #pragma once
 #include "Process.h"
+
 #include <functional>
 #include <memory>
 
-using DelegateFunction = std::function<void(std::unique_ptr<Process>)>;
+using DelegateFunctionParams1 = std::function<void(std::unique_ptr<Process>)>;
+using DelegateFunctionParams0 = std::function<void()>;
 
 class CPUDelegate
 {
 public:
-	void Subscribe(DelegateFunction func)
+	void Subscribe(DelegateFunctionParams1 func, int i)
 	{
-		function_ = func;
+		functionParam = func;
+
+	}
+	void Subscribe(DelegateFunctionParams0 func)
+	{
+		functionNoParam = func;
 	}
 	void operator()(std::unique_ptr<Process> process) const {
-		function_(std::move(process));
+		functionParam(std::move(process));
+	}
+	void operator()() const {
+		functionNoParam();
 	}
 private:
-	DelegateFunction function_;
+	DelegateFunctionParams1 functionParam;
+	DelegateFunctionParams0 functionNoParam;
 };
 
 	

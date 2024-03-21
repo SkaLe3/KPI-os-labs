@@ -1,11 +1,19 @@
 #include "ProcessProducer.h"
 #include "CPU.h"
-#include <random>
 
-
-ProcessProducer::ProcessProducer(ProducerProperties& props, std::weak_ptr<CPU> _cpu) : m_Properties(props), m_NextID(1), m_CPU(_cpu)
+ProcessProducer::ProcessProducer(ProducerProperties& props, std::weak_ptr<CPU> _cpu) : 
+	m_Properties(props), m_NextID(1), m_CPU(_cpu)
 {
-
+	if (m_Properties.Seed == 0)
+	{
+		m_RandomProcessSpawn.seed(std::random_device{}());
+		m_RandomBurstTime.seed(std::random_device{}());
+	}
+	else
+	{
+		m_RandomProcessSpawn.seed(m_Properties.Seed);
+		m_RandomBurstTime.seed(m_Properties.Seed);
+	}
 }
 
 
@@ -22,27 +30,31 @@ void ProcessProducer::Run()
 	}
 }
 
-
-
 bool ProcessProducer::Tick()
 {
-	// @TODO: Make random
-// Possibility of process spawn  (from 1 spawn on 5 ticks to 3 spawns on 1 tick)
-	return CreateProcess();
+	std::uniform_real_distribution<float> distribution(0.0f, 1.0f);
+	float randomNum = distribution(m_RandomProcessSpawn);
+
+	if (randomNum < m_Properties.SpawnChance)
+	{
+		return CreateProcess();
+	}
+	else 
+	{
+		return false;
+	}
 }
 
 
 bool ProcessProducer::CreateProcess()
 {
-	std::random_device rd;
-	std::mt19937 mt(rd());
 	std::uniform_real_distribution<float> processTimeDist(m_Properties.MinExpectedTime, m_Properties.MaxExpectedTime);
 
 	float currentTick;
 	if (auto lockedCPU = m_CPU.lock()) {
 		currentTick = lockedCPU->GetCurrentTick();
 	}
-	auto process = std::make_unique<Process>(m_NextID++, processTimeDist(mt), currentTick);
+	auto process = std::make_unique<Process>(m_NextID++, processTimeDist(m_RandomBurstTime), currentTick);
 	m_Queue->PushProcess(std::move(process));
 	m_Properties.ProcessesQuantity--;
 
@@ -51,6 +63,6 @@ bool ProcessProducer::CreateProcess()
 		// Not last process
 		return false;
 	}
-	// Not last process
+	// last process
 	return true;
 }

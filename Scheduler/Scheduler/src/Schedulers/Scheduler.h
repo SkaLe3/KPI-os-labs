@@ -1,6 +1,6 @@
 #pragma once
 #include "Queue.h"
-#include "CPU.h"
+
 #include <memory>
 #include <string>
 
@@ -9,7 +9,7 @@ enum class ESchedulerAlgorithm
 	None, RR, FCFS
 };
 
-
+class CPU;
 
 class Scheduler
 {
@@ -18,6 +18,7 @@ public:
 
 	void SetQueue(std::shared_ptr<Queue> queue);
 	void OnExecutionBreak(std::unique_ptr<Process> process);
+	void OnEmptyCPU();
 	bool IsActiveQueueEmpty();
 
 	virtual void PassNextProcess() = 0;

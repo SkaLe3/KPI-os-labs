@@ -1,5 +1,6 @@
 #include "Scheduler.h"
-
+#include "Log/Logger.h"
+#include "CPU.h"
 
 
 Scheduler::Scheduler(std::weak_ptr<CPU> _cpu) : m_CPU(_cpu)
@@ -7,11 +8,12 @@ Scheduler::Scheduler(std::weak_ptr<CPU> _cpu) : m_CPU(_cpu)
 	m_FinishedLog = std::make_unique<Queue>();
 
 	if (auto lockedCPU = m_CPU.lock()) {
-		lockedCPU->OnExecutionBreak.Subscribe(std::bind(&Scheduler::OnExecutionBreak, this, std::placeholders::_1));
+		lockedCPU->OnExecutionBreak.Subscribe(std::bind(&Scheduler::OnExecutionBreak, this, std::placeholders::_1), 1);
+		lockedCPU->OnExecutionBreak.Subscribe(std::bind(&Scheduler::OnEmptyCPU, this));
 	}
 	else
 	{
-		// @TODO: make error about invalid CPU while binding to it
+		LOG_ASSERT(false,"Invalid CPU during binding callback")
 	}
 }
 
@@ -31,6 +33,11 @@ void Scheduler::OnExecutionBreak(std::unique_ptr<Process> process)
 	{
 		m_ActiveQueue->PushProcess(std::move(process));
 	}
+	PassNextProcess();
+}
+
+void Scheduler::OnEmptyCPU()
+{
 	PassNextProcess();
 }
 

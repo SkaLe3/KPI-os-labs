@@ -1,4 +1,5 @@
 #include "CPU.h"
+#include <algorithm>
 
 
 void CPU::Tick()
@@ -6,18 +7,29 @@ void CPU::Tick()
 	m_Tick += 1;
 	m_QuantumLeft -= 1;
 
+	if (IsIdle())
+	{
+		OnExecutionBreak();
+		return;
+	}
+
 	m_ActiveProcess->Execute();
 
 	if (m_ActiveProcess->State == EProcessState::Finished)
 	{
 		m_ActiveProcess->FinishTime = m_Tick;
-		m_ActiveProcess->WaitTime = m_ActiveProcess->FinishTime - m_ActiveProcess->StartTime - m_ActiveProcess->WorkTime;
-		OnExecutionBreak(std::move(m_ActiveProcess));
+		m_ActiveProcess->WaitTime = m_ActiveProcess->FinishTime - m_ActiveProcess->CreationTime - m_ActiveProcess->WorkTime;
+		std::unique_ptr<Process> emptyProcess = nullptr;
+		std::swap(emptyProcess, m_ActiveProcess);
+		OnExecutionBreak(std::move(emptyProcess));
+		return;
 	}
 	if (bUseQuantum && m_QuantumLeft <= 0)
 	{
 		m_ActiveProcess->State = EProcessState::Waiting;
-		OnExecutionBreak(std::move(m_ActiveProcess));
+		std::unique_ptr<Process> emptyProcess = nullptr;
+		std::swap(emptyProcess, m_ActiveProcess);
+		OnExecutionBreak(std::move(emptyProcess));
 	}
 
 }
@@ -47,5 +59,4 @@ void CPU::Execute(std::unique_ptr<Process> process)
 		m_ActiveProcess->StartTime = m_Tick;
 	}
 	m_QuantumLeft = m_Quantum;
-
 }

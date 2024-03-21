@@ -92,6 +92,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\CPU.h" />
+    <ClInclude Include="src\Log\Logger.h" />
+    <ClInclude Include="src\Log\Printer.h" />
     <ClInclude Include="src\Process.h" />
     <ClInclude Include="src\ProcessProducer.h" />
     <ClInclude Include="src\Queue.h" />
@@ -102,14 +104,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\CPU.cpp" />
+    <ClCompile Include="src\Log\Logger.cpp" />
+    <ClCompile Include="src\Log\Printer.cpp" />
     <ClCompile Include="src\Process.cpp" />
     <ClCompile Include="src\ProcessProducer.cpp" />
     <ClCompile Include="src\Queue.cpp" />
     <ClCompile Include="src\Schedulers\FCFSScheduler.cpp" />
     <ClCompile Include="src\Schedulers\RRScheduler.cpp" />
     <ClCompile Include="src\Schedulers\Scheduler.cpp" />
-    <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\SystemController.cpp" />
+    <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
