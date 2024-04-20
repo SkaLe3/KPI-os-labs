@@ -290,6 +290,13 @@ void CoinChanger::AcceptCoins()
 	{
 		tasLock.lock();
 
+		if (newCoin != nullptr)
+		{
+			LOG_STATE("Previos coin still processing");
+			tasLock.unlock();
+			continue;
+		}
+
 		ShowAvailableCoins();
 		newCoin = AskForCoin();
 		requestedCoin = GetRequest((std::string)(*newCoin));
