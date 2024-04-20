@@ -51,6 +51,7 @@
 *bin/
 *bit-int/
 *.sln
+*.vcxproj
 
 
 
