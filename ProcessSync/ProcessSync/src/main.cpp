@@ -15,8 +15,6 @@ int main(int argc, char* argv[])
 		CoinChanger coinChanger;
 		coinChanger.FillCoins(parser.GetCoinsQuantity());
 		coinChanger.Start();
-
-
 	}
 	catch (const std::exception& ex)
 	{

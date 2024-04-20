@@ -6,6 +6,7 @@
 #include <random>
 #include <conio.h>
 #include <thread>
+#include <algorithm>
 
 
 
@@ -31,13 +32,11 @@ void CoinChanger::Start()
 {
 	LOG_TRACE("Coin changer started");
 
-
 	std::thread accepter(&CoinChanger::AcceptCoins, this);
 	std::thread changer(&CoinChanger::GiveChange, this);
 
 	accepter.join();
 	changer.join();
-
 }
 
 std::unique_ptr<Coin> CoinChanger::AskForCoin()
@@ -142,56 +141,85 @@ void CoinChanger::InsertCoin(std::unique_ptr<Coin> coin)
 	LOG_TRACE("Coin accepted");
 }
 
-void CoinChanger::ExtractCoins(ECoinDenom denom, uint32_t quantity)
+
+void CoinChanger::ExtractCoins()
 {
-	switch (denom)
+	for (std::pair<uint32_t, Coin> coin : change)
 	{
-	case ECoinDenom::_1k:
-		for (int i = 0; i < quantity; ++i)
-			stack1k.pop_back();
-		break;
-	case ECoinDenom::_2k:
-		for (int i = 0; i < quantity; ++i)
-			stack2k.pop_back();
-		break;
-	case ECoinDenom::_5k:
-		for (int i = 0; i < quantity; ++i)
-			stack5k.pop_back();
-		break;
-	case ECoinDenom::_10k:
-		for (int i = 0; i < quantity; ++i)
-			stack10k.pop_back();
-		break;
-	case ECoinDenom::_25k:
-		for (int i = 0; i < quantity; ++i)
-			stack25k.pop_back();
-		break;
-	case ECoinDenom::_50k:
-		for (int i = 0; i < quantity; ++i)
-			stack50k.pop_back();
-		break;
-	case ECoinDenom::_1h:
-		for (int i = 0; i < quantity; ++i)
-			stack1h.pop_back();
-		break;
+		switch (coin.second.Denomination)
+		{
+		case ECoinDenom::_1k:
+			for (int i = 0; i < coin.first; ++i)
+				stack1k.pop_back();
+			break;
+		case ECoinDenom::_2k:
+			for (int i = 0; i < coin.first; ++i)
+				stack2k.pop_back();
+			break;
+		case ECoinDenom::_5k:
+			for (int i = 0; i < coin.first; ++i)
+				stack5k.pop_back();
+			break;
+		case ECoinDenom::_10k:
+			for (int i = 0; i < coin.first; ++i)
+				stack10k.pop_back();
+			break;
+		case ECoinDenom::_25k:
+			for (int i = 0; i < coin.first; ++i)
+				stack25k.pop_back();
+			break;
+		case ECoinDenom::_50k:
+			for (int i = 0; i < coin.first; ++i)
+				stack50k.pop_back();
+			break;
+		case ECoinDenom::_1h:
+			for (int i = 0; i < coin.first; ++i)
+				stack1h.pop_back();
+			break;
+		}
 	}
 }
 
 bool CoinChanger::CheckExchangeAbility(uint32_t inserted, Coin requested)
 {
-	if (inserted % +requested.Denomination == 0)
+	if (+requested.Denomination > inserted)
 	{
-		uint32_t coinsCount = inserted / +requested.Denomination;
-		if (CheckCoinsPresence(requested.Denomination, coinsCount))
-			return true;
-		else
-		{
-			LOG_STATE("Not enough coins in machine");
-			return false;
-
-		}
+		LOG_STATE("Requested denomination must be lower than the denomination of the inserted coin");
+		return false;
 	}
-	LOG_STATE("Not possible to exchange the inserted coin for coins of the selected denomination");
+
+	uint32_t coinsCount = inserted / +requested.Denomination;
+	if (CheckCoinsPresence(requested.Denomination, coinsCount))
+	{
+
+		change.emplace_back(coinsCount, requested);
+		inserted = inserted - coinsCount * +requested.Denomination;
+		if (inserted == 0)
+			return true;
+		requested.Denomination = (ECoinDenom)((+requested.Denomination) - 1);
+	}
+	else
+	{
+		LOG_STATE("Not enough coins in machine");
+		return false;
+	}
+	while (true)
+	{
+		coinsCount = inserted / +requested.Denomination;
+		uint32_t has = GetAvailableCoins(requested.Denomination, coinsCount);
+		if (has != 0)
+			change.emplace_back(has, requested);
+
+		inserted -= has * +requested.Denomination;
+		if (inserted == 0)
+			return true;
+
+		if (requested.Denomination == ECoinDenom::_1k)
+			break;
+		requested.Denomination = (ECoinDenom)((+requested.Denomination) - 1);
+
+	}
+	LOG_STATE("Not enough coins in machine");
 	return false;
 }
 
@@ -217,6 +245,28 @@ bool CoinChanger::CheckCoinsPresence(ECoinDenom denom, uint32_t quantity)
 	return false;
 }
 
+uint32_t CoinChanger::GetAvailableCoins(ECoinDenom denom, uint32_t quantity)
+{
+	switch (denom)
+	{
+	case ECoinDenom::_1k:
+		return std::min(stack1k.size(), (size_t)quantity);
+	case ECoinDenom::_2k:
+		return std::min(stack2k.size(), (size_t)quantity);
+	case ECoinDenom::_5k:
+		return std::min(stack5k.size(), (size_t)quantity);
+	case ECoinDenom::_10k:
+		return std::min(stack10k.size(), (size_t)quantity);
+	case ECoinDenom::_25k:
+		return std::min(stack25k.size(), (size_t)quantity);
+	case ECoinDenom::_50k:
+		return std::min(stack50k.size(), (size_t)quantity);
+	case ECoinDenom::_1h:
+		return std::min(stack1h.size(), (size_t)quantity);
+	}
+	return 0;
+}
+
 uint32_t CoinChanger::GetCoinsQuantity(uint32_t inserted, Coin requested)
 {
 	return inserted / +requested.Denomination;
@@ -225,17 +275,17 @@ uint32_t CoinChanger::GetCoinsQuantity(uint32_t inserted, Coin requested)
 void CoinChanger::ShowAvailableCoins()
 {
 	std::cout << "Coins Available:\n";
-	std::cout << "1k: " << stack1k.size() << "\n";
-	std::cout << "2k: " << stack2k.size() << "\n";
-	std::cout << "5k: " << stack5k.size() << "\n";
-	std::cout << "10k: " << stack10k.size() << "\n";
-	std::cout << "25k: " << stack25k.size() << "\n";
-	std::cout << "50k: " << stack50k.size() << "\n";
-	std::cout << "1h: " << stack1h.size() << "\n\n";
+	std::cout << "                1k: " << stack1k.size() << "\n";
+	std::cout << "                2k: " << stack2k.size() << "\n";
+	std::cout << "                5k: " << stack5k.size() << "\n";
+	std::cout << "                10k: " << stack10k.size() << "\n";
+	std::cout << "                25k: " << stack25k.size() << "\n";
+	std::cout << "                50k: " << stack50k.size() << "\n";
+	std::cout << "                1h: " << stack1h.size() << "\n\n";
 }
 
 void CoinChanger::AcceptCoins()
-{	
+{
 	while (true)
 	{
 		tasLock.lock();
@@ -253,21 +303,29 @@ void CoinChanger::GiveChange()
 	while (true)
 	{
 		tasLock.lock();
-
+		if (newCoin == nullptr)
+		{
+			LOG_STATE("Waiting for coin");
+			change.clear();
+			tasLock.unlock();
+			continue;
+		}
 		if (CheckExchangeAbility(+newCoin->Denomination, requestedCoin))
 		{
 			uint32_t coins = GetCoinsQuantity(+newCoin->Denomination, requestedCoin);
 			InsertCoin(std::move(newCoin));
-			ExtractCoins(requestedCoin.Denomination, coins);
+			ExtractCoins();
 
-			LOG_TRACE("Exchange completed. You get", coins, (std::string)requestedCoin, "coins");
+			LOG_TRACE("Exchange completed. You get:");
+			for (std::pair<uint32_t, Coin>& p : change)
+			{
+				std::cout << "\t\t\t\t\t" << (std::string)p.second << ": " << p.first << " coins\n";
+			}
 		}
 		else
-			LOG_ERROR("Exchange refused");   
+			LOG_ERROR("Exchange refused");
 
+		change.clear();
 		tasLock.unlock();
-
 	}
 }
-
-

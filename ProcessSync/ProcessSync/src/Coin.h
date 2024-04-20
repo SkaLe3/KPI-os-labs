@@ -38,7 +38,6 @@ struct Coin
 			return "";
 		}
 	}
-
 	ECoinDenom Denomination;
 };
 
