@@ -332,6 +332,7 @@ void CoinChanger::GiveChange()
 		else
 			LOG_ERROR("Exchange refused");
 
+		newCoin = nullptr;
 		change.clear();
 		tasLock.unlock();
 	}
