@@ -1,7 +1,7 @@
 #pragma once
 #include "Process.h"
 
-#include <vector>
+#include <deque>
 #include <memory>
 #include <string>
 
@@ -24,9 +24,7 @@ private:
 	uint32_t m_Capacity;
 	uint32_t m_Used = 0;
 
-	std::vector<std::shared_ptr<Process>> m_Processes;
-
-	uint32_t m_NextProcess = 0;
+	std::deque<std::shared_ptr<Process>> m_Processes;
 
 	std::shared_ptr<Memory> m_ManagedMemory;
 

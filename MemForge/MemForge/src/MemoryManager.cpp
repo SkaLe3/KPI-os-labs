@@ -17,14 +17,14 @@ std::string MemoryManager::LoadNew()
 {
 	if (!m_Processes.empty())
 	{
-		std::shared_ptr<Process> loadedProcess = m_Processes[m_NextProcess];
+		std::shared_ptr<Process> loadedProcess = m_Processes.front();
+		m_Processes.pop_front();
 		if (loadedProcess->Size < GetFreeMemorySize())
 		{
 			bool success = m_ManagedMemory->CreatePartition(loadedProcess);
 			if (success)
 			{
 				m_Used += loadedProcess->Size;
-				m_NextProcess++;
 				return "Process loaded successfully";
 			}
 			else
@@ -43,14 +43,14 @@ std::string MemoryManager::LoadExisting(uint32_t partition)
 	{
 		if (!m_Processes.empty())
 		{
-			std::shared_ptr<Process> loadedProcess = m_Processes[m_NextProcess];
+			std::shared_ptr<Process> loadedProcess = m_Processes.front();
+			m_Processes.pop_front();
 			if (loadedProcess->Size < GetFreeMemorySize())
 			{
 				bool success = m_ManagedMemory->AddToPartition(loadedProcess, partition);
 				if (success)
 				{
 					m_Used += loadedProcess->Size;
-					m_NextProcess++;
 					return "Process loaded successfully";
 				}
 				else
@@ -74,7 +74,8 @@ std::string MemoryManager::Unload(uint32_t partition, uint32_t process)
 		return "Invalid process id";
 
 	m_Used -= (*m_ManagedMemory)[partition][process]->Size;
-	m_ManagedMemory->Unload(partition, process);
+	std::shared_ptr<Process> proc = m_ManagedMemory->Unload(partition, process);
+	m_Processes.push_back(proc);
 	return "Process unloaded";
 }
 

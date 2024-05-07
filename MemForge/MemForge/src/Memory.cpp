@@ -1,5 +1,5 @@
 #include "Memory.h"
-
+#include <iostream>
 
 
 Memory::Memory(uint32_t capacity)
@@ -73,6 +73,7 @@ uint32_t Memory::Compress()
 		}
 	}
 	uint32_t offset = m_Partitions.back().Base + m_Partitions.back().GetSize();
+	std::cout << "--> Compressed!\n";
 	return offset;
 }
 
@@ -119,20 +120,24 @@ bool Memory::ShiftPartitionOn(uint32_t id, uint32_t amount)
 	return true;
 }
 
-void Memory::Unload(uint32_t partition, uint32_t process)
+std::shared_ptr<Process> Memory::Unload(uint32_t partition, uint32_t process)
 {
 	Partition& part = m_Partitions[partition];
+	std::shared_ptr<Process> proc;
 	if (part.GetProcessCount() == 1)
 	{
-		DeletePartition(partition);
+		proc = DeletePartition(partition);
 	}
 	else
 	{
-		part.DeleteProcess(process);
+		proc = part.DeleteProcess(process);
 	}
+	return proc;
 }
 
-void Memory::DeletePartition(uint32_t partition)
+std::shared_ptr<Process> Memory::DeletePartition(uint32_t partition)
 {
+	std::shared_ptr<Process> process = m_Partitions[partition][0];
 	m_Partitions.erase(m_Partitions.begin() + partition);
+	return process;
 }

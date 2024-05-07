@@ -3,7 +3,7 @@
 
 
 
-SystemController::SystemController(uint32_t memoryCapacity) : m_Manager(memoryCapacity), m_Memory(std::make_shared<Memory>(memoryCapacity))
+SystemController::SystemController(uint32_t memoryCapacity, uint32_t procs) : m_Manager(memoryCapacity), m_ProcsNumber(procs), m_Memory(std::make_shared<Memory>(memoryCapacity))
 {
 
 }
@@ -11,7 +11,7 @@ SystemController::SystemController(uint32_t memoryCapacity) : m_Manager(memoryCa
 void SystemController::Run()
 {
 	m_Manager.SetMemory(m_Memory);
-	m_Manager.CreateProcesses(10);
+	m_Manager.CreateProcesses(m_ProcsNumber);
 
 	uint32_t choice = 0;
 	while (choice != 5)

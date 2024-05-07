@@ -12,9 +12,11 @@ void Partition::AddProcess(std::shared_ptr<Process> process)
 	m_Processes.push_back(process);
 }
 
-void Partition::DeleteProcess(uint32_t process)
+std::shared_ptr<Process> Partition::DeleteProcess(uint32_t process)
 {
+	std::shared_ptr<Process> proc = m_Processes[process];
 	m_Processes.erase(m_Processes.begin() + process);
+	return proc;
 }
 
 uint32_t Partition::GetSize()
@@ -46,10 +48,5 @@ uint32_t Partition::GetAdress(uint32_t process)
 std::shared_ptr<Process> Partition::operator[](uint32_t index)
 {
 	return m_Processes[index];
-}
-
-std::vector<std::shared_ptr<Process>>::iterator Partition::begin()
-{
-	return m_Processes.begin();
 }
 

@@ -91,21 +91,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\Memory.cpp" />
-    <ClCompile Include="src\MemoryManager.cpp" />
-    <ClCompile Include="src\Partition.cpp" />
-    <ClCompile Include="src\Process.cpp" />
-    <ClCompile Include="src\SystemController.cpp" />
-    <ClCompile Include="src\SystemUI.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="src\Memory.h" />
     <ClInclude Include="src\MemoryManager.h" />
     <ClInclude Include="src\Partition.h" />
     <ClInclude Include="src\Process.h" />
     <ClInclude Include="src\SystemController.h" />
     <ClInclude Include="src\SystemUI.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Memory.cpp" />
+    <ClCompile Include="src\MemoryManager.cpp" />
+    <ClCompile Include="src\Partition.cpp" />
+    <ClCompile Include="src\Process.cpp" />
+    <ClCompile Include="src\SystemController.cpp" />
+    <ClCompile Include="src\SystemUI.cpp" />
+    <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

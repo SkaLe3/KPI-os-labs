@@ -22,5 +22,4 @@ private:
 
 	std::string StringifyAddress(uint32_t address, uint32_t capacity);
 	uint32_t MakeRequest(const std::string& object);
-	  // TODO : Move methods to private section. + all check for this all other classes
 };
