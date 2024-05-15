@@ -319,7 +319,7 @@ void CoinChanger::GiveChange()
 		}
 		if (CheckExchangeAbility(+newCoin->Denomination, requestedCoin))
 		{
-			uint32_t coins = GetCoinsQuantity(+newCoin->Denomination, requestedCoin);
+			uint32_t coins = GetCoinsQuantity(+newCoin->Denomination, requestedCoin);	// ?
 			InsertCoin(std::move(newCoin));
 			ExtractCoins();
 
@@ -333,6 +333,7 @@ void CoinChanger::GiveChange()
 			LOG_ERROR("Exchange refused");
 
 		change.clear();
+		newCoin = nullptr;
 		tasLock.unlock();
 	}
 }
