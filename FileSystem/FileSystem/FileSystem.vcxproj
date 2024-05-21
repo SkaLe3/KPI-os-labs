@@ -91,7 +91,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Controller.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\SystemUI.cpp" />
+    <ClCompile Include="src\Tree.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Controller.h" />
+    <ClInclude Include="src\SystemUI.h" />
+    <ClInclude Include="src\Tree.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

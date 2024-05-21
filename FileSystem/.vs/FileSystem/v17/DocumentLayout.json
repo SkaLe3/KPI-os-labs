@@ -3,8 +3,32 @@
   "WorkspaceRootPath": "C:\\KPI\\6semester\\OS\\Labs\\Labs\\FileSystem\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{6A7A86EC-5632-C839-BF39-A195AB10632A}|FileSystem\\FileSystem.vcxproj|C:\\KPI\\6semester\\OS\\Labs\\Labs\\FileSystem\\FileSystem\\src\\Tree.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{6A7A86EC-5632-C839-BF39-A195AB10632A}|FileSystem\\FileSystem.vcxproj|solutionrelative:FileSystem\\src\\Tree.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A7A86EC-5632-C839-BF39-A195AB10632A}|FileSystem\\FileSystem.vcxproj|C:\\KPI\\6semester\\OS\\Labs\\Labs\\FileSystem\\FileSystem\\src\\Tree.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{6A7A86EC-5632-C839-BF39-A195AB10632A}|FileSystem\\FileSystem.vcxproj|solutionrelative:FileSystem\\src\\Tree.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A7A86EC-5632-C839-BF39-A195AB10632A}|FileSystem\\FileSystem.vcxproj|C:\\KPI\\6semester\\OS\\Labs\\Labs\\FileSystem\\FileSystem\\src\\Controller.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{6A7A86EC-5632-C839-BF39-A195AB10632A}|FileSystem\\FileSystem.vcxproj|solutionrelative:FileSystem\\src\\Controller.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A7A86EC-5632-C839-BF39-A195AB10632A}|FileSystem\\FileSystem.vcxproj|C:\\KPI\\6semester\\OS\\Labs\\Labs\\FileSystem\\FileSystem\\src\\SystemUI.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{6A7A86EC-5632-C839-BF39-A195AB10632A}|FileSystem\\FileSystem.vcxproj|solutionrelative:FileSystem\\src\\SystemUI.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A7A86EC-5632-C839-BF39-A195AB10632A}|FileSystem\\FileSystem.vcxproj|C:\\KPI\\6semester\\OS\\Labs\\Labs\\FileSystem\\FileSystem\\src\\SystemUI.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{6A7A86EC-5632-C839-BF39-A195AB10632A}|FileSystem\\FileSystem.vcxproj|solutionrelative:FileSystem\\src\\SystemUI.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{6A7A86EC-5632-C839-BF39-A195AB10632A}|FileSystem\\FileSystem.vcxproj|C:\\KPI\\6semester\\OS\\Labs\\Labs\\FileSystem\\FileSystem\\src\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{6A7A86EC-5632-C839-BF39-A195AB10632A}|FileSystem\\FileSystem.vcxproj|solutionrelative:FileSystem\\src\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6A7A86EC-5632-C839-BF39-A195AB10632A}|FileSystem\\FileSystem.vcxproj|C:\\KPI\\6semester\\OS\\Labs\\Labs\\FileSystem\\FileSystem\\src\\Controller.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{6A7A86EC-5632-C839-BF39-A195AB10632A}|FileSystem\\FileSystem.vcxproj|solutionrelative:FileSystem\\src\\Controller.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,12 +51,90 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Tree.cpp",
+              "DocumentMoniker": "C:\\KPI\\6semester\\OS\\Labs\\Labs\\FileSystem\\FileSystem\\src\\Tree.cpp",
+              "RelativeDocumentMoniker": "FileSystem\\src\\Tree.cpp",
+              "ToolTip": "C:\\KPI\\6semester\\OS\\Labs\\Labs\\FileSystem\\FileSystem\\src\\Tree.cpp",
+              "RelativeToolTip": "FileSystem\\src\\Tree.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAADAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-05-21T11:17:04.86Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Tree.h",
+              "DocumentMoniker": "C:\\KPI\\6semester\\OS\\Labs\\Labs\\FileSystem\\FileSystem\\src\\Tree.h",
+              "RelativeDocumentMoniker": "FileSystem\\src\\Tree.h",
+              "ToolTip": "C:\\KPI\\6semester\\OS\\Labs\\Labs\\FileSystem\\FileSystem\\src\\Tree.h",
+              "RelativeToolTip": "FileSystem\\src\\Tree.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-05-21T10:06:57.384Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "SystemUI.cpp",
+              "DocumentMoniker": "C:\\KPI\\6semester\\OS\\Labs\\Labs\\FileSystem\\FileSystem\\src\\SystemUI.cpp",
+              "RelativeDocumentMoniker": "FileSystem\\src\\SystemUI.cpp",
+              "ToolTip": "C:\\KPI\\6semester\\OS\\Labs\\Labs\\FileSystem\\FileSystem\\src\\SystemUI.cpp",
+              "RelativeToolTip": "FileSystem\\src\\SystemUI.cpp",
+              "ViewState": "AQIAABkAAAAAAAAAAAAowC4AAAA2AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-05-21T09:42:57.604Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "SystemUI.h",
+              "DocumentMoniker": "C:\\KPI\\6semester\\OS\\Labs\\Labs\\FileSystem\\FileSystem\\src\\SystemUI.h",
+              "RelativeDocumentMoniker": "FileSystem\\src\\SystemUI.h",
+              "ToolTip": "C:\\KPI\\6semester\\OS\\Labs\\Labs\\FileSystem\\FileSystem\\src\\SystemUI.h",
+              "RelativeToolTip": "FileSystem\\src\\SystemUI.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-05-21T09:41:44.346Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Controller.cpp",
+              "DocumentMoniker": "C:\\KPI\\6semester\\OS\\Labs\\Labs\\FileSystem\\FileSystem\\src\\Controller.cpp",
+              "RelativeDocumentMoniker": "FileSystem\\src\\Controller.cpp",
+              "ToolTip": "C:\\KPI\\6semester\\OS\\Labs\\Labs\\FileSystem\\FileSystem\\src\\Controller.cpp",
+              "RelativeToolTip": "FileSystem\\src\\Controller.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABgAAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-05-21T09:41:30.003Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Controller.h",
+              "DocumentMoniker": "C:\\KPI\\6semester\\OS\\Labs\\Labs\\FileSystem\\FileSystem\\src\\Controller.h",
+              "RelativeDocumentMoniker": "FileSystem\\src\\Controller.h",
+              "ToolTip": "C:\\KPI\\6semester\\OS\\Labs\\Labs\\FileSystem\\FileSystem\\src\\Controller.h",
+              "RelativeToolTip": "FileSystem\\src\\Controller.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-05-21T09:38:17.782Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "main.cpp",
               "DocumentMoniker": "C:\\KPI\\6semester\\OS\\Labs\\Labs\\FileSystem\\FileSystem\\src\\main.cpp",
               "RelativeDocumentMoniker": "FileSystem\\src\\main.cpp",
               "ToolTip": "C:\\KPI\\6semester\\OS\\Labs\\Labs\\FileSystem\\FileSystem\\src\\main.cpp",
               "RelativeToolTip": "FileSystem\\src\\main.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAKAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-05-21T07:35:11.97Z",
               "EditorCaption": ""
