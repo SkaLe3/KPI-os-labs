@@ -44,13 +44,14 @@ std::string MemoryManager::LoadExisting(uint32_t partition)
 		if (!m_Processes.empty())
 		{
 			std::shared_ptr<Process> loadedProcess = m_Processes.front();
-			m_Processes.pop_front();
+
 			if (loadedProcess->Size < GetFreeMemorySize())
 			{
 				bool success = m_ManagedMemory->AddToPartition(loadedProcess, partition);
 				if (success)
 				{
 					m_Used += loadedProcess->Size;
+					m_Processes.pop_front();
 					return "Process loaded successfully";
 				}
 				else
