@@ -17,7 +17,7 @@ void Controller::Run()
 		switch (choice)
 		{
 		case  1:
-			m_UI.DisplayTree();
+			m_UI.DisplayTree(m_Tree);
 			response = "Tree printed";
 			break;
 		case 2:

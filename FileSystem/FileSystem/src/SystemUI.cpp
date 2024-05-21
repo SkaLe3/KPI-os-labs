@@ -18,9 +18,10 @@ void SystemUI::DisplayMenu()
 	std::cout << "================================\n";
 }
 
-void SystemUI::DisplayTree()
-{
 
+void SystemUI::DisplayTree(Tree& tree)
+{
+	tree.InOrder();
 }
 
 void SystemUI::Exit()

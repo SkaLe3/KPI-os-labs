@@ -7,7 +7,7 @@ class SystemUI
 {
 public:
 	void DisplayMenu();
-	void DisplayTree();
+	void DisplayTree(Tree& tree);
 	void Exit();
 	void Notify(const std::string& message);
 
