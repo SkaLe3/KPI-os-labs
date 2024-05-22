@@ -10,8 +10,8 @@ struct NodeData
 
 	bool operator<(const NodeData& other) const;
 	bool operator>(const NodeData& other) const;
-
 };
+std::ostream& operator<<(std::ostream& os, const NodeData& obj);
 
 struct TreeNode
 {
@@ -28,7 +28,7 @@ struct TreeNode
 class Tree
 {
 public:
-	Tree() : m_Root(nullptr){}
+	Tree() : m_Root(nullptr) {}
 
 	void Insert(NodeData data);
 	void InOrder();

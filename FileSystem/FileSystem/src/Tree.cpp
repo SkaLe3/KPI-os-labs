@@ -54,7 +54,7 @@ void Tree::InOrder(std::shared_ptr<TreeNode> node)
 	if (node != nullptr)
 	{
 		InOrder(node->Left);
-		std::cout << node->Data.Letter1 << "??" << "\n";
+		std::cout << node->Data << "\n";
 		InOrder(node->Right);
 	}
 }
@@ -134,4 +134,10 @@ bool NodeData::operator>(const NodeData& other) const
 		return false;
 	else
 		return false;
+}
+
+std::ostream& operator<<(std::ostream& os, const NodeData& obj)
+{
+	os << obj.Letter1 << obj.Letter2 << char(obj.Digit + '0');
+	return os;
 }

@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\KPI\6semester\OS\Labs\Labs\FileSystem\bin\Debug-windows-x86_64\FileSystem\fs.exe</FullPath>
+      <FullPath>C:\KPI\6Semester\OS\KPI-OS-labs\FileSystem\bin\Debug-windows-x86_64\FileSystem\fs.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />
