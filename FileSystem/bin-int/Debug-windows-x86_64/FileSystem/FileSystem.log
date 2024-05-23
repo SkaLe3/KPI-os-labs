@@ -1,3 +1,5 @@
-﻿  FileSystem.vcxproj -> C:\KPI\6Semester\OS\KPI-OS-labs\FileSystem\bin\Debug-windows-x86_64\FileSystem\fs.exe
+﻿  Tree.cpp
+C:\KPI\6Semester\OS\KPI-OS-labs\FileSystem\FileSystem\src\Tree.cpp(204,2): warning C4267: 'return': conversion from 'size_t' to 'uint32_t', possible loss of data
+  FileSystem.vcxproj -> C:\KPI\6Semester\OS\KPI-OS-labs\FileSystem\bin\Debug-windows-x86_64\FileSystem\fs.exe
   'pwsh.exe' is not recognized as an internal or external command,
   operable program or batch file.
