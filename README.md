@@ -1,2 +1,2 @@
-# KPI-OS-labs
-Operating System labs
+# KPI-os-labs
+Operating Systems Labs
